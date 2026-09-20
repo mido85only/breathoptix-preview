@@ -1,103 +1,138 @@
 import { Link } from "@tanstack/react-router";
-import { Menu, ShoppingCart, X } from "lucide-react";
+import { Activity, Menu, ShoppingCart, X, Calendar, Phone } from "lucide-react";
 import { useState } from "react";
 import { useShop } from "./shop-store";
-
-const links = [
-  { to: "/", label: "Home" },
-  { to: "/services", label: "Services" },
-  { to: "/shop", label: "Shop Supplies" },
-  { to: "/about", label: "About" },
-  { to: "/contact", label: "Contact" },
-] as const;
 
 export function SiteHeader() {
   const { count, openCart, openBooking } = useShop();
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40">
-      <div className="frost border-b border-white/60">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-          <Link to="/" className="flex items-center gap-2">
-            <span className="grid size-9 place-items-center rounded-xl bg-brand font-display text-lg font-extrabold text-primary-foreground">
-              B
-            </span>
-            <span className="font-display text-lg font-extrabold tracking-tight">
-              BreathOptix
-            </span>
-          </Link>
-
-          <nav className="hidden items-center gap-8 text-sm font-medium text-ink/70 lg:flex">
-            {links.map((l) => (
-              <Link
-                key={l.to}
-                to={l.to}
-                activeOptions={{ exact: l.to === "/" }}
-                activeProps={{ className: "text-brand" }}
-                className="transition hover:text-brand"
-              >
-                {l.label}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="flex items-center gap-3">
-            <button
-              onClick={openCart}
-              aria-label={`Open cart, ${count} items`}
-              className="relative grid size-10 place-items-center rounded-full border border-white/70 bg-white/70 text-ink/70 transition hover:text-brand"
-            >
-              <ShoppingCart className="size-[18px]" />
-              {count > 0 && (
-                <span className="absolute -right-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-brand px-1 text-[10px] font-bold text-primary-foreground">
-                  {count}
-                </span>
-              )}
-            </button>
-            <button
-              onClick={() => openBooking()}
-              className="hidden rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-brand/30 transition hover:bg-brand-deep sm:block"
-            >
-              Book an Appointment
-            </button>
-            <button
-              onClick={() => setOpen((v) => !v)}
-              aria-label="Toggle menu"
-              className="grid size-10 place-items-center rounded-full border border-white/70 bg-white/70 text-ink/70 lg:hidden"
-            >
-              {open ? <X className="size-[18px]" /> : <Menu className="size-[18px]" />}
-            </button>
+    <header className="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/85 backdrop-blur-md transition-all">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
+        {/* Brand Logo */}
+        <Link to="/" className="flex items-center gap-3 group">
+          <div className="relative flex size-11 items-center justify-center rounded-2xl bg-gradient-to-tr from-sky-600 to-cyan-500 shadow-md shadow-sky-500/20 text-white font-display text-xl font-black tracking-tighter transition-transform group-hover:scale-105">
+            <Activity className="size-6 text-white" />
           </div>
-        </div>
+          <div>
+            <span className="font-display text-xl font-extrabold tracking-tight text-slate-900 flex items-center gap-1">
+              Breath<span className="text-sky-600">Optix</span>
+            </span>
+            <span className="block text-[10px] font-semibold uppercase tracking-widest text-slate-400">
+              Diagnostics &amp; Sleep Clinic
+            </span>
+          </div>
+        </Link>
 
-        {open && (
-          <nav className="border-t border-white/60 px-6 py-4 lg:hidden">
-            <div className="flex flex-col gap-3 text-sm font-medium text-ink/75">
-              {links.map((l) => (
-                <Link
-                  key={l.to}
-                  to={l.to}
-                  onClick={() => setOpen(false)}
-                  activeOptions={{ exact: l.to === "/" }}
-                  activeProps={{ className: "text-brand" }}
-                >
-                  {l.label}
-                </Link>
-              ))}
-              <button
-                onClick={() => {
-                  setOpen(false);
-                  openBooking();
-                }}
-                className="mt-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-primary-foreground"
-              >
-                Book an Appointment
-              </button>
-            </div>
-          </nav>
-        )}
+        {/* Desktop Navigation */}
+        <nav className="hidden items-center gap-8 text-sm font-semibold text-slate-600 lg:flex">
+          <a href="/#services" className="transition hover:text-sky-600">
+            Clinical Services
+          </a>
+          <a href="/#how-it-works" className="transition hover:text-sky-600">
+            How It Works
+          </a>
+          <a href="/#shop" className="transition hover:text-sky-600">
+            CPAP Supplies Shop
+          </a>
+          <a href="/#referrals" className="transition hover:text-sky-600">
+            Physician Referrals
+          </a>
+          <a href="/#location" className="transition hover:text-sky-600">
+            Clinic &amp; Hours
+          </a>
+        </nav>
+
+        {/* Actions (Cart & Book CTA) */}
+        <div className="flex items-center gap-3">
+          {/* Cart Icon */}
+          <button
+            onClick={openCart}
+            aria-label={`Open cart with ${count} items`}
+            className="relative flex size-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-sky-300 hover:text-sky-600 hover:shadow"
+          >
+            <ShoppingCart className="size-5" />
+            {count > 0 && (
+              <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-sky-600 px-1.5 text-[10px] font-bold text-white shadow-sm animate-scale">
+                {count}
+              </span>
+            )}
+          </button>
+
+          {/* Book Appointment CTA */}
+          <button
+            onClick={() => openBooking()}
+            className="hidden sm:inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-sky-600 to-cyan-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-sky-500/25 transition-all hover:from-sky-700 hover:to-cyan-700 hover:shadow-sky-500/35 hover:-translate-y-0.5 active:translate-y-0"
+          >
+            <Calendar className="size-4" />
+            <span>Book Diagnostic Test</span>
+          </button>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Toggle menu"
+            className="flex size-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 lg:hidden"
+          >
+            {open ? <X className="size-5" /> : <Menu className="size-5" />}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile Drawer */}
+      {open && (
+        <div className="border-t border-slate-200/80 bg-white px-6 py-6 shadow-xl lg:hidden">
+          <nav className="flex flex-col gap-4 text-base font-semibold text-slate-700">
+            <a
+              href="/#services"
+              onClick={() => setOpen(false)}
+              className="py-1 hover:text-sky-600"
+            >
+              Clinical Services
+            </a>
+            <a
+              href="/#how-it-works"
+              onClick={() => setOpen(false)}
+              className="py-1 hover:text-sky-600"
+            >
+              How It Works
+            </a>
+            <a
+              href="/#shop"
+              onClick={() => setOpen(false)}
+              className="py-1 hover:text-sky-600"
+            >
+              CPAP Supplies Shop
+            </a>
+            <a
+              href="/#referrals"
+              onClick={() => setOpen(false)}
+              className="py-1 hover:text-sky-600"
+            >
+              Physician Referrals
+            </a>
+            <a
+              href="/#location"
+              onClick={() => setOpen(false)}
+              className="py-1 hover:text-sky-600"
+            >
+              Clinic &amp; Hours
+            </a>
+
+            <button
+              onClick={() => {
+                setOpen(false);
+                openBooking();
+              }}
+              className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-sky-600 py-3.5 text-sm font-bold text-white shadow-md shadow-sky-500/20"
+            >
+              <Calendar className="size-4" />
+              <span>Book an Appointment</span>
+            </button>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
