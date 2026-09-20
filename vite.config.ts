@@ -5,6 +5,7 @@ import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
 import { fileURLToPath, URL } from "node:url";
 
 export default defineConfig({
+  base: process.env.BASE_URL || "/",
   plugins: [
     TanStackRouterVite({ target: "react", autoCodeSplitting: true }),
     react(),
