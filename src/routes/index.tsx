@@ -54,6 +54,8 @@ export const Route = createFileRoute("/")({
 function LandingPage() {
   const { openBooking, openCart } = useShop();
   const [activeCategory, setActiveCategory] = useState<Category | "All">("All");
+  const [heroService, setHeroService] = useState<string>(services[0]?.title || "");
+  const [heroPathway, setHeroPathway] = useState<string>("Doctor Referral");
 
   const filteredProducts =
     activeCategory === "All"
@@ -95,75 +97,131 @@ function LandingPage() {
   return (
     <div className="relative overflow-hidden bg-slate-50 text-slate-900">
       {/* ========================================================================= */}
-      {/* 1. HERO SECTION */}
+      {/* 1. HERO SECTION WITH BREATHING AURORA & INTERACTIVE QUICK-INTAKE */}
       {/* ========================================================================= */}
-      <section className="relative pt-8 pb-16 lg:pt-14 lg:pb-24 overflow-hidden">
-        {/* Soft Ambient Background Glows */}
-        <div className="ambient-glow -top-24 -left-24 size-96 bg-sky-200/50" />
-        <div className="ambient-glow top-1/3 -right-24 size-[32rem] bg-cyan-100/60" />
+      <section className="relative pt-6 pb-16 lg:pt-12 lg:pb-24 overflow-hidden">
+        {/* Breathing Aurora Ambient Glows */}
+        <div className="ambient-glow animate-breathe -top-20 -left-20 size-[32rem] bg-gradient-to-tr from-sky-400/25 via-cyan-300/20 to-blue-400/20" />
+        <div className="ambient-glow animate-breathe top-1/4 -right-20 size-[36rem] bg-gradient-to-bl from-cyan-300/20 via-sky-300/25 to-teal-200/20" />
 
         <div className="relative mx-auto max-w-7xl px-6">
           <div className="grid items-center gap-12 lg:grid-cols-12">
-            {/* Left Column: Copy & CTAs */}
+            {/* Left Column: Copy & Interactive Quick-Book */}
             <div className="lg:col-span-7">
-              {/* Live Status Badge */}
-              <div className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50/90 px-4 py-1.5 text-xs font-bold text-sky-800 backdrop-blur-sm shadow-sm">
-                <span className="flex size-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span>Accepting New Patients &amp; Referrals · Edmonton, AB</span>
+              {/* Live Status Pill with Pulse Dot */}
+              <div className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white/90 px-4 py-1.5 text-xs font-bold text-sky-800 shadow-sm backdrop-blur-md">
+                <span className="relative flex size-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
+                </span>
+                <span>Accepting New Patients &amp; Referrals · Edmonton Clinic</span>
               </div>
 
               {/* Main Headline */}
               <h1 className="mt-6 font-display text-4xl font-black tracking-tight text-slate-900 sm:text-5xl lg:text-6xl leading-[1.08]">
-                Breathe easier with <br />
-                <span className="bg-gradient-to-r from-sky-600 to-cyan-500 bg-clip-text text-transparent">
-                  precision respiratory
+                Breathe clearly. <br />
+                <span className="bg-gradient-to-r from-sky-600 via-cyan-600 to-teal-500 bg-clip-text text-transparent">
+                  Live fully with precision
                 </span>{" "}
-                care.
+                respiratory care.
               </h1>
 
-              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600">
-                Edmonton's dedicated diagnostic clinic providing Comprehensive Pulmonary Function
-                Testing (PFT), Spirometry, and Sleep Apnea evaluations. Certified respiratory
-                therapists and specialist respirologist interpretation delivered with empathy and speed.
+              <p className="mt-5 max-w-2xl text-base sm:text-lg leading-relaxed text-slate-600">
+                Edmonton's dedicated diagnostic laboratory for Full Pulmonary Function Testing (PFT),
+                Spirometry, and Sleep Apnea evaluations. Certified respiratory therapists, expert
+                respirologist interpretation, and hospital-grade CPAP supplies in one modern space.
               </p>
 
-              {/* Action Buttons */}
-              <div className="mt-8 flex flex-wrap items-center gap-4">
-                <button
-                  onClick={() => openBooking()}
-                  className="flex items-center gap-2.5 rounded-full bg-gradient-to-r from-sky-600 to-cyan-600 px-8 py-4 text-base font-bold text-white shadow-xl shadow-sky-500/25 transition-all hover:from-sky-700 hover:to-cyan-700 hover:shadow-sky-500/40 hover:-translate-y-0.5 active:translate-y-0"
-                >
-                  <Calendar className="size-5" />
-                  <span>Book Diagnostic Test</span>
-                </button>
+              {/* THE INTERACTIVE QUICK-INTAKE WIDGET (World-Class Health UX) */}
+              <div className="mt-8 rounded-3xl border border-slate-200/90 bg-white/95 p-3 sm:p-4 shadow-xl shadow-sky-950/5 backdrop-blur-xl transition-all hover:border-sky-300">
+                <div className="grid gap-3 sm:grid-cols-12 items-center">
+                  {/* Segment 1: Service */}
+                  <div className="sm:col-span-5 px-3 py-1">
+                    <label className="block text-[10px] font-extrabold uppercase tracking-wider text-slate-400">
+                      1. Diagnostic Modality
+                    </label>
+                    <select
+                      value={heroService}
+                      onChange={(e) => setHeroService(e.target.value)}
+                      className="mt-1 w-full bg-transparent font-display text-sm font-bold text-slate-800 outline-none cursor-pointer hover:text-sky-600 transition"
+                    >
+                      {services.map((s) => (
+                        <option key={s.id} value={s.title}>
+                          {s.title}
+                        </option>
+                      ))}
+                      <option value={cpapFittingService}>{cpapFittingService}</option>
+                    </select>
+                  </div>
 
+                  {/* Divider */}
+                  <div className="hidden sm:block sm:col-span-1 h-10 w-px bg-slate-200 justify-self-center" />
+
+                  {/* Segment 2: Pathway */}
+                  <div className="sm:col-span-3 px-3 py-1">
+                    <label className="block text-[10px] font-extrabold uppercase tracking-wider text-slate-400">
+                      2. Patient Pathway
+                    </label>
+                    <select
+                      value={heroPathway}
+                      onChange={(e) => setHeroPathway(e.target.value)}
+                      className="mt-1 w-full bg-transparent font-display text-sm font-bold text-slate-800 outline-none cursor-pointer hover:text-sky-600 transition"
+                    >
+                      <option value="Doctor Referral">Physician Referral</option>
+                      <option value="Self-Referral">Self-Referral</option>
+                      <option value="CPAP Patient">CPAP Patient</option>
+                    </select>
+                  </div>
+
+                  {/* Segment 3: CTA Button */}
+                  <div className="sm:col-span-3">
+                    <button
+                      onClick={() => openBooking(heroService)}
+                      className="w-full flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-sky-600 to-cyan-600 py-3.5 px-4 text-xs font-bold text-white shadow-lg shadow-sky-500/25 transition-all hover:from-sky-700 hover:to-cyan-700 hover:shadow-sky-500/35 active:scale-98"
+                    >
+                      <Calendar className="size-4" />
+                      <span>Find Next Slot</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Links Strip */}
+              <div className="mt-4 flex flex-wrap items-center gap-4 text-xs font-bold text-slate-600 px-2">
                 <a
                   href="#shop"
-                  className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-7 py-4 text-base font-bold text-slate-700 shadow-sm transition hover:border-sky-300 hover:text-sky-600 hover:shadow-md"
+                  className="flex items-center gap-1.5 text-sky-600 hover:text-sky-700 hover:underline"
                 >
-                  <span>Explore CPAP Supplies</span>
-                  <ArrowRight className="size-4" />
+                  <span>Browse authentic CPAP supplies store</span>
+                  <ArrowRight className="size-3.5" />
+                </a>
+                <span className="hidden sm:inline text-slate-300">·</span>
+                <a
+                  href="#referrals"
+                  className="hover:text-slate-900 transition"
+                >
+                  Doctor referral guidelines &amp; fax
                 </a>
               </div>
 
-              {/* Trust Features Strip */}
-              <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 pt-6 border-t border-slate-200/80">
+              {/* Trust Badges Strip */}
+              <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 pt-6 border-t border-slate-200/80">
                 <div className="flex items-center gap-2.5 text-xs font-bold text-slate-700">
-                  <div className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-emerald-100 text-emerald-600">
+                  <div className="flex size-8 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-600">
                     <CheckCircle2 className="size-4" />
                   </div>
-                  <span>Physician Referrals Welcome</span>
+                  <span>Physician Referrals Accepted</span>
                 </div>
 
                 <div className="flex items-center gap-2.5 text-xs font-bold text-slate-700">
-                  <div className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-sky-100 text-sky-600">
+                  <div className="flex size-8 shrink-0 items-center justify-center rounded-xl bg-sky-100 text-sky-600">
                     <Clock className="size-4" />
                   </div>
-                  <span>24–48h Report Turnaround</span>
+                  <span>24–48h Rapid Reports</span>
                 </div>
 
                 <div className="flex items-center gap-2.5 text-xs font-bold text-slate-700 col-span-2 sm:col-span-1">
-                  <div className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-cyan-100 text-cyan-600">
+                  <div className="flex size-8 shrink-0 items-center justify-center rounded-xl bg-cyan-100 text-cyan-600">
                     <ShieldCheck className="size-4" />
                   </div>
                   <span>Alberta HIA Compliant</span>
@@ -171,11 +229,11 @@ function LandingPage() {
               </div>
             </div>
 
-            {/* Right Column: Hero Visual with Layered Floating Cards */}
+            {/* Right Column: Hero Visual with Animated Levitation Badges */}
             <div className="relative lg:col-span-5">
               <div className="relative mx-auto max-w-md lg:max-w-none">
-                {/* Main Clinic Image Frame */}
-                <div className="relative overflow-hidden rounded-3xl border-4 border-white bg-slate-100 shadow-2xl shadow-slate-900/10">
+                {/* Main Clinic Image Frame with Glow */}
+                <div className="relative overflow-hidden rounded-3xl border-4 border-white bg-slate-100 shadow-2xl shadow-slate-900/15">
                   <img
                     src={heroImg}
                     alt="Respiratory therapist conducting lung function testing at BreathOptix Edmonton"
@@ -183,7 +241,7 @@ function LandingPage() {
                     height={1280}
                     className="aspect-[4/5] w-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
 
                   {/* Caption on image */}
                   <div className="absolute bottom-6 left-6 right-6 text-white">
@@ -191,46 +249,52 @@ function LandingPage() {
                       Accredited Diagnostic Lab
                     </span>
                     <p className="mt-2 text-sm font-semibold text-slate-100">
-                      Modern diagnostic testing equipment &amp; certified clinical care team.
+                      State-of-the-art respiratory sensors &amp; compassionate clinical team.
                     </p>
                   </div>
                 </div>
 
-                {/* Floating Card 1: Fast Turnaround (Top Right) */}
-                <div className="absolute -top-5 -right-4 sm:-right-6 flex items-center gap-3 rounded-2xl border border-white/80 bg-white/95 p-3.5 shadow-xl backdrop-blur-md">
-                  <div className="flex size-10 items-center justify-center rounded-xl bg-sky-50 text-sky-600">
+                {/* Floating Card 1 (Organic Float): On Duty Staff */}
+                <div className="animate-float absolute -top-5 -right-4 sm:-right-6 flex items-center gap-3 rounded-2xl border border-white/90 bg-white/95 p-3.5 shadow-2xl backdrop-blur-md">
+                  <div className="flex size-11 items-center justify-center rounded-xl bg-gradient-to-tr from-sky-500 to-cyan-400 text-white shadow-md shadow-sky-500/20">
                     <Activity className="size-5" />
                   </div>
                   <div>
-                    <span className="block text-xs font-extrabold text-slate-900">
-                      Rapid Results
+                    <span className="flex items-center gap-1.5 text-xs font-black text-slate-900">
+                      <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+                      Staff On Duty
                     </span>
                     <span className="text-[11px] font-medium text-slate-500">
-                      Reports to MD in 24–48h
+                      Licensed RRTs &amp; Respirologists
                     </span>
                   </div>
                 </div>
 
-                {/* Floating Card 2: Location Card (Bottom Left) */}
-                <div className="absolute -bottom-6 -left-4 sm:-left-6 flex items-center gap-3 rounded-2xl border border-white/80 bg-white/95 p-3.5 shadow-xl backdrop-blur-md">
-                  <div className="flex size-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-                    <MapPin className="size-5" />
+                {/* Floating Card 2 (Organic Float Delayed): Fast 24h Turnaround */}
+                <div className="animate-float-delayed absolute -bottom-6 -left-4 sm:-left-6 flex items-center gap-3 rounded-2xl border border-white/90 bg-white/95 p-3.5 shadow-2xl backdrop-blur-md">
+                  <div className="flex size-11 items-center justify-center rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 text-white shadow-md shadow-emerald-500/20">
+                    <Clock className="size-5" />
                   </div>
                   <div>
-                    <span className="block text-xs font-extrabold text-slate-900">
-                      Edmonton Clinic
+                    <span className="block text-xs font-black text-slate-900">
+                      24–48h Results
                     </span>
                     <span className="text-[11px] font-medium text-slate-500">
-                      8130 82 Ave NW
+                      Fast report to your Family MD
                     </span>
                   </div>
+                </div>
+
+                {/* Floating Card 3: Social Proof Badge */}
+                <div className="absolute top-1/2 -left-5 hidden xl:flex items-center gap-2 rounded-full border border-white/90 bg-white/90 px-3 py-1.5 text-xs font-bold text-slate-800 shadow-xl backdrop-blur-md">
+                  <span className="text-amber-400">★★★★★</span>
+                  <span>4.9 (2,500+ Patients)</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-
       {/* ========================================================================= */}
       {/* 2. CLINICAL STATS HIGHLIGHT */}
       {/* ========================================================================= */}

@@ -83,42 +83,46 @@
 
 /* Glass & Glow utilities */
 @utility glass-panel {
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.06);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.08);
 }
 
 @utility glass-card {
   background: #ffffff;
   border: 1px solid #e2e8f0;
   box-shadow: 0 4px 20px -4px rgba(15, 23, 42, 0.05);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 
   &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 30px -6px rgba(14, 165, 233, 0.12);
+    transform: translateY(-4px);
+    box-shadow: 0 14px 34px -6px rgba(14, 165, 233, 0.15);
     border-color: #bae6fd;
   }
 }
 
 @utility glass-dark {
-  background: rgba(15, 23, 42, 0.92);
+  background: rgba(15, 23, 42, 0.94);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: 0 20px 40px -15px rgba(2, 6, 23, 0.35);
 }
 
 @utility ambient-glow {
   position: absolute;
   border-radius: 9999px;
-  filter: blur(80px);
-  opacity: 0.6;
+  filter: blur(90px);
+  opacity: 0.55;
   pointer-events: none;
   z-index: 0;
 }
+
+/* ========================================================================= */
+/* Modern Keyframe Animations (Apple & Linear physics) */
+/* ========================================================================= */
 
 @keyframes drawer-in {
   from {
@@ -146,4 +150,63 @@
 
 @utility animate-modal-in {
   animation: modal-in 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 1. Organic Floating Levitation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(0.4deg);
+  }
+}
+
+@utility animate-float {
+  animation: float 4.8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes float-delayed {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(9px) rotate(-0.4deg);
+  }
+}
+
+@utility animate-float-delayed {
+  animation: float-delayed 5.4s cubic-bezier(0.45, 0, 0.55, 1) 1.2s infinite;
+}
+
+/* 2. Aurora Breathing Glow */
+@keyframes breathe-glow {
+  0%, 100% {
+    transform: scale(1) translate(0, 0);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scale(1.18) translate(25px, -20px);
+    opacity: 0.65;
+  }
+}
+
+@utility animate-breathe {
+  animation: breathe-glow 8.5s ease-in-out infinite;
+}
+
+/* 3. Smooth Spring Entrance */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-reveal {
+  animation: reveal-up 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
