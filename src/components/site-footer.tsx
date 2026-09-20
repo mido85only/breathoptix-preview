@@ -1,4 +1,5 @@
 import { Activity, Mail, MapPin, Phone, ShieldCheck } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { clinic } from "@/lib/clinic-data";
 
 export function SiteFooter() {
@@ -42,29 +43,29 @@ export function SiteFooter() {
             </h4>
             <ul className="mt-4 space-y-2.5 text-xs text-slate-400">
               <li>
-                <a href="/#services" className="hover:text-sky-400 transition">
+                <Link to="/" hash="services" className="hover:text-sky-400 transition">
                   Clinical Services
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/#how-it-works" className="hover:text-sky-400 transition">
+                <Link to="/" hash="how-it-works" className="hover:text-sky-400 transition">
                   How It Works
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/#shop" className="hover:text-sky-400 transition">
+                <Link to="/shop" className="hover:text-sky-400 transition">
                   CPAP Supplies Store
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/#referrals" className="hover:text-sky-400 transition">
+                <Link to="/" hash="referrals" className="hover:text-sky-400 transition">
                   Physician Referrals
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/#location" className="hover:text-sky-400 transition">
+                <Link to="/" hash="location" className="hover:text-sky-400 transition">
                   Clinic Location
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -106,8 +107,8 @@ export function SiteFooter() {
         <div className="mt-16 pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <p>© {new Date().getFullYear()} BreathOptix Diagnostic Clinic. All rights reserved.</p>
           <div className="flex items-center gap-6">
-            <a href="/privacy" className="hover:text-slate-400">Privacy Policy</a>
-            <a href="/terms" className="hover:text-slate-400">Terms of Service</a>
+            <a href="#privacy" className="hover:text-slate-400">Privacy Policy</a>
+            <a href="#terms" className="hover:text-slate-400">Terms of Service</a>
             <span>Edmonton, Alberta</span>
           </div>
         </div>

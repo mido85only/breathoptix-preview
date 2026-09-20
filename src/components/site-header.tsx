@@ -75,36 +75,41 @@ export function SiteHeader() {
 
           {/* Center Navigation Links */}
           <nav className="hidden items-center gap-7 text-sm font-bold text-slate-700 lg:flex">
-            <a
-              href="/#services"
+            <Link
+              to="/"
+              hash="services"
               className="transition hover:text-sky-600 active:text-sky-700"
             >
               Diagnostics
-            </a>
-            <a
-              href="/#about-clinic"
+            </Link>
+            <Link
+              to="/"
+              hash="about-clinic"
               className="transition hover:text-sky-600 active:text-sky-700"
             >
               The Clinic
-            </a>
-            <a
-              href="/#how-it-works"
+            </Link>
+            <Link
+              to="/"
+              hash="how-it-works"
               className="transition hover:text-sky-600 active:text-sky-700"
             >
               Patient Journey
-            </a>
-            <a
-              href="/#referrals"
+            </Link>
+            <Link
+              to="/"
+              hash="referrals"
               className="transition hover:text-sky-600 active:text-sky-700"
             >
               Physicians
-            </a>
-            <a
-              href="/#location"
+            </Link>
+            <Link
+              to="/"
+              hash="location"
               className="transition hover:text-sky-600 active:text-sky-700"
             >
               Hours &amp; Map
-            </a>
+            </Link>
 
             {/* Prominent Shop Link in Navigation */}
             <Link
@@ -187,41 +192,46 @@ export function SiteHeader() {
                 <span className="text-xs font-extrabold text-sky-600">Shop →</span>
               </Link>
 
-              <a
-                href="/#services"
+              <Link
+                to="/"
+                hash="services"
                 onClick={() => setOpen(false)}
                 className="py-1 hover:text-sky-600"
               >
                 Diagnostic Services
-              </a>
-              <a
-                href="/#about-clinic"
+              </Link>
+              <Link
+                to="/"
+                hash="about-clinic"
                 onClick={() => setOpen(false)}
                 className="py-1 hover:text-sky-600"
               >
                 The Clinic Tour
-              </a>
-              <a
-                href="/#how-it-works"
+              </Link>
+              <Link
+                to="/"
+                hash="how-it-works"
                 onClick={() => setOpen(false)}
                 className="py-1 hover:text-sky-600"
               >
                 Patient Journey
-              </a>
-              <a
-                href="/#referrals"
+              </Link>
+              <Link
+                to="/"
+                hash="referrals"
                 onClick={() => setOpen(false)}
                 className="py-1 hover:text-sky-600"
               >
                 Physician Referrals
-              </a>
-              <a
-                href="/#location"
+              </Link>
+              <Link
+                to="/"
+                hash="location"
                 onClick={() => setOpen(false)}
                 className="py-1 hover:text-sky-600"
               >
                 Location &amp; Hours
-              </a>
+              </Link>
 
               <div className="pt-4 border-t border-slate-100 flex flex-col gap-3">
                 <button
