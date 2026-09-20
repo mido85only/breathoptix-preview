@@ -1,6 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import heroImg from "@/assets/hero-clinic.jpg";
+import servicePftImg from "@/assets/service-pft.jpg";
+import serviceSleepImg from "@/assets/service-sleep.jpg";
+import serviceConsultImg from "@/assets/service-consult.jpg";
+import clinicInteriorImg from "@/assets/clinic-interior.jpg";
+import clinicSuiteImg from "@/assets/clinic-suite.jpg";
+import doctorReferralImg from "@/assets/doctor-referral.jpg";
 import { useShop } from "@/components/shop-store";
 import { ProductCard } from "@/components/product-card";
 import {
@@ -54,20 +60,35 @@ function LandingPage() {
       ? products
       : products.filter((p) => p.category === activeCategory);
 
+  const getServicePhoto = (id: string) => {
+    switch (id) {
+      case "pft":
+        return servicePftImg;
+      case "spirometry":
+        return servicePftImg;
+      case "consultation":
+        return serviceConsultImg;
+      case "sleep":
+        return serviceSleepImg;
+      default:
+        return clinicSuiteImg;
+    }
+  };
+
   const getServiceIcon = (id: string) => {
     switch (id) {
       case "pft":
-        return <Wind className="size-6 text-sky-600" />;
+        return <Wind className="size-5 text-sky-600" />;
       case "spirometry":
-        return <Activity className="size-6 text-cyan-600" />;
+        return <Activity className="size-5 text-cyan-600" />;
       case "assessment":
-        return <Stethoscope className="size-6 text-sky-600" />;
+        return <Stethoscope className="size-5 text-sky-600" />;
       case "consultation":
-        return <HeartPulse className="size-6 text-blue-600" />;
+        return <HeartPulse className="size-5 text-blue-600" />;
       case "sleep":
-        return <Moon className="size-6 text-indigo-600" />;
+        return <Moon className="size-5 text-indigo-600" />;
       default:
-        return <Activity className="size-6 text-sky-600" />;
+        return <Activity className="size-5 text-sky-600" />;
     }
   };
 
@@ -76,7 +97,7 @@ function LandingPage() {
       {/* ========================================================================= */}
       {/* 1. HERO SECTION */}
       {/* ========================================================================= */}
-      <section className="relative pt-10 pb-20 lg:pt-16 lg:pb-28 overflow-hidden">
+      <section className="relative pt-8 pb-16 lg:pt-14 lg:pb-24 overflow-hidden">
         {/* Soft Ambient Background Glows */}
         <div className="ambient-glow -top-24 -left-24 size-96 bg-sky-200/50" />
         <div className="ambient-glow top-1/3 -right-24 size-[32rem] bg-cyan-100/60" />
@@ -85,8 +106,8 @@ function LandingPage() {
           <div className="grid items-center gap-12 lg:grid-cols-12">
             {/* Left Column: Copy & CTAs */}
             <div className="lg:col-span-7">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50/80 px-4 py-1.5 text-xs font-bold text-sky-800 backdrop-blur-sm shadow-sm">
+              {/* Live Status Badge */}
+              <div className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50/90 px-4 py-1.5 text-xs font-bold text-sky-800 backdrop-blur-sm shadow-sm">
                 <span className="flex size-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span>Accepting New Patients &amp; Referrals · Edmonton, AB</span>
               </div>
@@ -162,7 +183,7 @@ function LandingPage() {
                     height={1280}
                     className="aspect-[4/5] w-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent" />
 
                   {/* Caption on image */}
                   <div className="absolute bottom-6 left-6 right-6 text-white">
@@ -170,7 +191,7 @@ function LandingPage() {
                       Accredited Diagnostic Lab
                     </span>
                     <p className="mt-2 text-sm font-semibold text-slate-100">
-                      State-of-the-art diagnostic testing equipment &amp; certified clinical team.
+                      Modern diagnostic testing equipment &amp; certified clinical care team.
                     </p>
                   </div>
                 </div>
@@ -223,7 +244,7 @@ function LandingPage() {
               <p className="mt-1 text-xs font-bold uppercase tracking-wider text-slate-500">
                 Report Turnaround
               </p>
-              <p className="mt-1 text-xs text-slate-400">Direct transmission to your doctor</p>
+              <p className="mt-1 text-xs text-slate-400">Direct transmission to your physician</p>
             </div>
 
             <div className="text-center md:border-r border-slate-100">
@@ -233,7 +254,7 @@ function LandingPage() {
               <p className="mt-1 text-xs font-bold uppercase tracking-wider text-slate-500">
                 Full Diagnostic Scope
               </p>
-              <p className="mt-1 text-xs text-slate-400">PFT, Spirometry &amp; Sleep Testing</p>
+              <p className="mt-1 text-xs text-slate-400">PFT, Spirometry &amp; Sleep Studies</p>
             </div>
 
             <div className="text-center md:border-r border-slate-100">
@@ -241,7 +262,7 @@ function LandingPage() {
                 100%
               </span>
               <p className="mt-1 text-xs font-bold uppercase tracking-wider text-slate-500">
-                Licensed Staff
+                Licensed Team
               </p>
               <p className="mt-1 text-xs text-slate-400">Registered Respiratory Therapists</p>
             </div>
@@ -251,107 +272,135 @@ function LandingPage() {
                 Direct Care
               </span>
               <p className="mt-1 text-xs font-bold uppercase tracking-wider text-slate-500">
-                Referral &amp; Direct
+                Easy Scheduling
               </p>
-              <p className="mt-1 text-xs text-slate-400">Serving Edmonton &amp; N. Alberta</p>
+              <p className="mt-1 text-xs text-slate-400">Physician referral or self-inquiry</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* 3. CLINICAL SERVICES SECTION (BENTO GRID) */}
+      {/* 3. CLINICAL SERVICES WITH PHOTOGRAPHY (BENTO GRID) */}
       {/* ========================================================================= */}
       <section id="services" className="py-24 scroll-mt-20">
         <div className="mx-auto max-w-7xl px-6">
           <div className="max-w-2xl">
             <span className="inline-block text-xs font-bold uppercase tracking-wider text-sky-600 bg-sky-50 px-3 py-1 rounded-full border border-sky-100">
-              Comprehensive Diagnostics
+              Diagnostic Services
             </span>
             <h2 className="mt-3 font-display text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
               Advanced clinical services, tailored for your lungs.
             </h2>
             <p className="mt-3 text-base text-slate-600">
               Every study is administered by certified respiratory therapists and interpreted by a
-              specialist respirologist to ensure thorough diagnostic accuracy.
+              specialist respirologist to ensure rigorous diagnostic accuracy.
             </p>
           </div>
 
           <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {services.map((s) => (
-              <div
-                key={s.id}
-                className="group relative flex flex-col justify-between rounded-3xl border border-slate-200/80 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-sky-300 hover:shadow-xl hover:shadow-sky-500/10"
-              >
-                <div>
-                  <div className="flex size-12 items-center justify-center rounded-2xl bg-sky-50 transition-colors group-hover:bg-sky-600 group-hover:text-white">
-                    {getServiceIcon(s.id)}
-                  </div>
-                  <span className="mt-5 block text-xs font-bold uppercase tracking-wider text-sky-600">
-                    {s.eyebrow}
-                  </span>
-                  <h3 className="mt-1 font-display text-xl font-bold text-slate-900">
-                    {s.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                    {s.description}
-                  </p>
-                </div>
-
-                <div className="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between">
-                  <button
-                    onClick={() => openBooking(s.title)}
-                    className="flex items-center gap-1.5 text-sm font-bold text-sky-600 hover:text-sky-700 group-hover:translate-x-0.5 transition-transform"
-                  >
-                    <span>Book This Test</span>
-                    <ArrowRight className="size-4" />
-                  </button>
-                  <span className="text-[11px] font-semibold text-slate-400">Covered via Referral</span>
-                </div>
-              </div>
-            ))}
-
-            {/* Featured Bento Box: CPAP Fitting & Consultation */}
-            <div className="relative flex flex-col justify-between rounded-3xl bg-gradient-to-br from-slate-900 via-slate-800 to-sky-950 p-8 text-white shadow-xl shadow-slate-900/15">
-              <div>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-xs font-bold uppercase tracking-wider text-sky-300 backdrop-blur-sm">
-                  <Shield className="size-3.5" /> Prescription Fitting
-                </span>
-
-                <h3 className="mt-4 font-display text-2xl font-black text-white">
-                  CPAP Machine Sizing &amp; Clinical Calibration
-                </h3>
-
-                <p className="mt-3 text-sm leading-relaxed text-slate-300">
-                  CPAP machines are precision medical equipment. In accordance with Alberta clinical
-                  standards, pressure calibration, mask fitting, and compliance tracking are
-                  conducted in-clinic — never sold uncalibrated online.
-                </p>
-
-                <ul className="mt-5 space-y-2 text-xs text-slate-300">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="size-4 text-sky-400" />
-                    <span>Custom 3D facial mask sizing</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="size-4 text-sky-400" />
-                    <span>Pressure titration &amp; humidification setup</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="size-4 text-sky-400" />
-                    <span>Ongoing compliance reports for your physician</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="mt-8 pt-6 border-t border-white/10">
-                <button
-                  onClick={() => openBooking(cpapFittingService)}
-                  className="w-full flex items-center justify-center gap-2 rounded-full bg-sky-500 py-3.5 text-sm font-bold text-white shadow-lg shadow-sky-500/30 transition hover:bg-sky-400"
+            {services.map((s) => {
+              const photo = getServicePhoto(s.id);
+              return (
+                <div
+                  key={s.id}
+                  className="group relative flex flex-col overflow-hidden rounded-3xl border border-slate-200/80 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-sky-300 hover:shadow-xl hover:shadow-sky-500/10"
                 >
-                  <Calendar className="size-4" />
-                  <span>Book CPAP Fitting &amp; Consult</span>
-                </button>
+                  {/* Photo Header */}
+                  <div className="relative h-48 w-full overflow-hidden bg-slate-100">
+                    <img
+                      src={photo}
+                      alt={s.title}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-950/20 to-transparent" />
+
+                    <div className="absolute top-3.5 left-3.5 flex size-10 items-center justify-center rounded-xl bg-white/90 shadow-md backdrop-blur-sm">
+                      {getServiceIcon(s.id)}
+                    </div>
+
+                    <span className="absolute bottom-3 left-4 text-xs font-bold uppercase tracking-wider text-sky-300 drop-shadow">
+                      {s.eyebrow}
+                    </span>
+                  </div>
+
+                  {/* Card Body */}
+                  <div className="flex flex-1 flex-col justify-between p-6">
+                    <div>
+                      <h3 className="font-display text-lg font-bold text-slate-900 group-hover:text-sky-600 transition-colors">
+                        {s.title}
+                      </h3>
+                      <p className="mt-2 text-xs leading-relaxed text-slate-600">
+                        {s.description}
+                      </p>
+                    </div>
+
+                    <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                      <button
+                        onClick={() => openBooking(s.title)}
+                        className="flex items-center gap-1.5 text-xs font-bold text-sky-600 hover:text-sky-700 transition"
+                      >
+                        <span>Book This Test</span>
+                        <ArrowRight className="size-3.5" />
+                      </button>
+                      <span className="text-[11px] font-semibold text-slate-400">
+                        Covered via Referral
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+
+            {/* Featured Bento Box: CPAP Fitting & Consultation with Visual Banner */}
+            <div className="group relative flex flex-col justify-between overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-slate-800 to-sky-950 text-white shadow-xl shadow-slate-900/15">
+              {/* Photo top header */}
+              <div className="relative h-48 w-full overflow-hidden">
+                <img
+                  src={clinicSuiteImg}
+                  alt="CPAP Calibration Suite"
+                  loading="lazy"
+                  className="h-full w-full object-cover opacity-60 transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent" />
+                <div className="absolute top-3.5 left-3.5 inline-flex items-center gap-1.5 rounded-full bg-sky-500/80 px-3 py-1 text-xs font-bold text-white backdrop-blur-sm">
+                  <Shield className="size-3.5" /> Prescription Fitting
+                </div>
+              </div>
+
+              <div className="p-6 pt-2 flex flex-1 flex-col justify-between">
+                <div>
+                  <h3 className="font-display text-xl font-black text-white">
+                    CPAP Machine Sizing &amp; Clinical Calibration
+                  </h3>
+
+                  <p className="mt-2 text-xs leading-relaxed text-slate-300">
+                    CPAP machines require medical prescription &amp; in-clinic fitting. We size your
+                    mask, set your pressure titration, and provide ongoing compliance reports for your physician.
+                  </p>
+
+                  <ul className="mt-4 space-y-1.5 text-[11px] text-slate-300">
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="size-3.5 text-sky-400" />
+                      <span>Custom facial mask sizing &amp; comfort seal</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="size-3.5 text-sky-400" />
+                      <span>Pressure calibration &amp; humidifier tuning</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mt-6 pt-4 border-t border-white/10">
+                  <button
+                    onClick={() => openBooking(cpapFittingService)}
+                    className="w-full flex items-center justify-center gap-2 rounded-full bg-sky-500 py-3 text-xs font-bold text-white shadow-lg shadow-sky-500/30 transition hover:bg-sky-400 active:scale-98"
+                  >
+                    <Calendar className="size-4" />
+                    <span>Book In-Clinic Fitting</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -359,9 +408,107 @@ function LandingPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 4. HOW IT WORKS (3-STEP PATIENT JOURNEY) */}
+      {/* 4. NEW: CLINIC ATMOSPHERE & ENVIRONMENT (VISUAL SHOWCASE) */}
       {/* ========================================================================= */}
-      <section id="how-it-works" className="border-y border-slate-200/80 bg-white py-24 scroll-mt-20">
+      <section id="about-clinic" className="border-y border-slate-200/80 bg-white py-24 scroll-mt-20">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="grid gap-12 lg:grid-cols-12 items-center">
+            {/* Left: Dual Photo Gallery Collage */}
+            <div className="lg:col-span-6 relative">
+              <div className="grid grid-cols-12 gap-4">
+                {/* Photo 1: Lounge */}
+                <div className="col-span-8 overflow-hidden rounded-3xl border-4 border-white shadow-xl">
+                  <img
+                    src={clinicInteriorImg}
+                    alt="BreathOptix clinic reception and patient lounge in Edmonton"
+                    className="h-64 sm:h-80 w-full object-cover"
+                  />
+                </div>
+
+                {/* Photo 2: Diagnostic Suite */}
+                <div className="col-span-4 flex flex-col justify-between overflow-hidden rounded-3xl border-4 border-white shadow-xl bg-slate-900">
+                  <img
+                    src={clinicSuiteImg}
+                    alt="Testing suite equipment"
+                    className="h-full w-full object-cover opacity-90"
+                  />
+                </div>
+              </div>
+
+              {/* Floating Quote Badge */}
+              <div className="absolute -bottom-6 left-6 right-6 sm:right-auto flex items-center gap-3 rounded-2xl border border-white/90 bg-white/95 p-4 shadow-xl backdrop-blur-md">
+                <div className="flex size-10 items-center justify-center rounded-xl bg-sky-100 text-sky-600 shrink-0">
+                  <HeartPulse className="size-5" />
+                </div>
+                <div>
+                  <p className="text-xs font-extrabold text-slate-900">
+                    Designed for Patient Comfort &amp; Breathing Ease
+                  </p>
+                  <p className="text-[11px] text-slate-500">
+                    No hospital queues · Direct parking · Private suites
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Copy Description */}
+            <div className="lg:col-span-6 lg:pl-6 pt-6 lg:pt-0">
+              <span className="text-xs font-bold uppercase tracking-wider text-sky-600 bg-sky-50 px-3 py-1 rounded-full border border-sky-100">
+                The Patient Experience
+              </span>
+              <h2 className="mt-3 font-display text-3xl font-black text-slate-900 sm:text-4xl">
+                A calm, state-of-the-art diagnostic environment.
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-slate-600">
+                Medical diagnostics don't have to be stressful or cold. We designed BreathOptix to
+                feel welcoming, clean, and modern. From comfortable private testing rooms to
+                friendly therapists who listen, we make your lung and sleep assessment smooth from start to finish.
+              </p>
+
+              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                <div className="rounded-2xl border border-slate-200/80 bg-slate-50/50 p-4">
+                  <h4 className="font-display font-bold text-slate-900 text-sm">
+                    Dedicated Private Suites
+                  </h4>
+                  <p className="mt-1 text-xs text-slate-500 leading-relaxed">
+                    Individual examination spaces equipped with state-of-the-art diagnostic air sensors.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-slate-200/80 bg-slate-50/50 p-4">
+                  <h4 className="font-display font-bold text-slate-900 text-sm">
+                    Direct Free Parking
+                  </h4>
+                  <p className="mt-1 text-xs text-slate-500 leading-relaxed">
+                    Easy doorstep parking right on 82 Ave NW — no parkades or long hospital walks.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-8 flex items-center gap-4">
+                <button
+                  onClick={() => openBooking()}
+                  className="rounded-full bg-slate-900 px-6 py-3.5 text-xs font-bold text-white transition hover:bg-sky-600"
+                >
+                  Schedule Your Visit
+                </button>
+                <a
+                  href="#location"
+                  className="text-xs font-bold text-sky-600 hover:underline flex items-center gap-1"
+                >
+                  <span>View location &amp; hours</span>
+                  <ArrowRight className="size-3.5" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 5. HOW IT WORKS (3-STEP PATIENT JOURNEY) */}
+      {/* ========================================================================= */}
+      <section id="how-it-works" className="py-24 scroll-mt-20 bg-slate-50">
         <div className="mx-auto max-w-7xl px-6">
           <div className="text-center max-w-2xl mx-auto">
             <span className="text-xs font-bold uppercase tracking-wider text-sky-600 bg-sky-50 px-3 py-1 rounded-full border border-sky-100">
@@ -377,42 +524,42 @@ function LandingPage() {
 
           <div className="mt-16 grid gap-8 md:grid-cols-3 relative">
             {/* Step 1 */}
-            <div className="relative rounded-3xl border border-slate-200/80 bg-slate-50/50 p-8">
+            <div className="relative rounded-3xl border border-slate-200/80 bg-white p-8 shadow-sm">
               <div className="flex size-14 items-center justify-center rounded-2xl bg-sky-600 text-white font-display text-xl font-black shadow-md shadow-sky-600/20">
                 01
               </div>
               <h3 className="mt-6 font-display text-xl font-bold text-slate-900">
                 Request or Referral
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600">
+              <p className="mt-2 text-xs leading-relaxed text-slate-600">
                 Submit an appointment request online or have your family physician fax/email a
                 referral form. Our intake team confirms within 1 business day.
               </p>
             </div>
 
             {/* Step 2 */}
-            <div className="relative rounded-3xl border border-slate-200/80 bg-slate-50/50 p-8">
+            <div className="relative rounded-3xl border border-slate-200/80 bg-white p-8 shadow-sm">
               <div className="flex size-14 items-center justify-center rounded-2xl bg-cyan-600 text-white font-display text-xl font-black shadow-md shadow-cyan-600/20">
                 02
               </div>
               <h3 className="mt-6 font-display text-xl font-bold text-slate-900">
                 Comfortable In-Clinic Testing
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600">
+              <p className="mt-2 text-xs leading-relaxed text-slate-600">
                 Visit our modern Edmonton clinic. Our licensed respiratory therapists guide you
                 step-by-step through your lung function or sleep evaluation.
               </p>
             </div>
 
             {/* Step 3 */}
-            <div className="relative rounded-3xl border border-slate-200/80 bg-slate-50/50 p-8">
+            <div className="relative rounded-3xl border border-slate-200/80 bg-white p-8 shadow-sm">
               <div className="flex size-14 items-center justify-center rounded-2xl bg-slate-900 text-white font-display text-xl font-black shadow-md shadow-slate-900/20">
                 03
               </div>
               <h3 className="mt-6 font-display text-xl font-bold text-slate-900">
                 Rapid Specialist Results
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600">
+              <p className="mt-2 text-xs leading-relaxed text-slate-600">
                 A specialist respirologist analyzes your findings. Formal diagnostic reports are
                 returned directly to your doctor within 24 to 48 hours.
               </p>
@@ -422,21 +569,21 @@ function LandingPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 5. INTEGRATED CPAP & RESPIRATORY SUPPLIES STORE */}
+      {/* 6. INTEGRATED CPAP & RESPIRATORY SUPPLIES STORE */}
       {/* ========================================================================= */}
-      <section id="shop" className="py-24 scroll-mt-20">
+      <section id="shop" className="border-t border-slate-200/80 bg-white py-24 scroll-mt-20">
         <div className="mx-auto max-w-7xl px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-sky-600 bg-sky-50 px-3 py-1 rounded-full border border-sky-100">
-                Clinical E-Commerce Store
+                Supplies &amp; Accessories Store
               </span>
               <h2 className="mt-3 font-display text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
                 Genuine CPAP &amp; Respiratory Supplies
               </h2>
               <p className="mt-2 text-base text-slate-600 max-w-2xl">
                 Hospital-grade replacement parts, memory-foam cushions, filters, and sanitizer wipes.
-                Priced in Canadian Dollars (CAD) with Edmonton clinic pickup or express delivery.
+                Priced in Canadian Dollars (CAD) with Edmonton clinic pickup or fast Alberta shipping.
               </p>
             </div>
 
@@ -492,46 +639,55 @@ function LandingPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 6. PHYSICIAN REFERRALS & PATIENT PREPARATION GUIDE */}
+      {/* 7. PHYSICIAN REFERRALS & PATIENT PREPARATION (WITH DOCTOR PHOTO) */}
       {/* ========================================================================= */}
-      <section id="referrals" className="border-t border-slate-200/80 bg-white py-24 scroll-mt-20">
+      <section id="referrals" className="border-t border-slate-200/80 bg-slate-50 py-24 scroll-mt-20">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid gap-8 lg:grid-cols-2">
-            {/* Box 1: For Physicians */}
-            <div className="rounded-3xl border border-slate-200/90 bg-gradient-to-br from-slate-50 to-sky-50/30 p-8 sm:p-10 shadow-sm">
-              <div className="flex size-12 items-center justify-center rounded-2xl bg-sky-600 text-white">
-                <FileText className="size-6" />
+            {/* Box 1: For Physicians with Doctor Photo */}
+            <div className="overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-sm flex flex-col justify-between">
+              <div>
+                <div className="relative h-48 w-full overflow-hidden">
+                  <img
+                    src={doctorReferralImg}
+                    alt="Doctor reviewing diagnostic report"
+                    className="h-full w-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/30 to-transparent" />
+                  <span className="absolute bottom-4 left-6 text-xs font-bold uppercase tracking-wider text-sky-300">
+                    Medical Professionals
+                  </span>
+                </div>
+
+                <div className="p-8">
+                  <h3 className="font-display text-2xl font-black text-slate-900">
+                    For Referring Physicians
+                  </h3>
+
+                  <p className="mt-2 text-xs leading-relaxed text-slate-600">
+                    We partner with primary care clinics, family doctors, and regional specialists across Edmonton &amp; Northern Alberta. Submit referrals securely via fax or encrypted email.
+                  </p>
+
+                  <div className="mt-6 rounded-2xl bg-slate-50 p-4 border border-slate-200 space-y-2.5 text-xs">
+                    <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+                      <span className="font-bold text-slate-700">Direct Intake Email</span>
+                      <a href="mailto:info@breathoptix.ca" className="font-bold text-sky-600 hover:underline">
+                        info@breathoptix.ca
+                      </a>
+                    </div>
+                    <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+                      <span className="font-bold text-slate-700">Turnaround Standard</span>
+                      <span className="text-slate-600 font-semibold">24–48 hours post-study</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="font-bold text-slate-700">Required Info</span>
+                      <span className="text-slate-600">PHN, Patient DOB, Requested Modality</span>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <span className="mt-6 block text-xs font-bold uppercase tracking-wider text-sky-600">
-                Medical Professionals
-              </span>
-              <h3 className="mt-1 font-display text-2xl font-black text-slate-900">
-                For Referring Physicians
-              </h3>
-
-              <p className="mt-3 text-sm leading-relaxed text-slate-600">
-                We partner with primary care clinics, family doctors, and regional specialists across Edmonton &amp; Northern Alberta. Submit referrals securely via fax or encrypted email.
-              </p>
-
-              <div className="mt-6 rounded-2xl bg-white p-5 border border-slate-200 space-y-3 text-xs">
-                <div className="flex items-center justify-between border-b border-slate-100 pb-2">
-                  <span className="font-bold text-slate-700">Direct Intake Email</span>
-                  <a href="mailto:info@breathoptix.ca" className="font-bold text-sky-600 hover:underline">
-                    info@breathoptix.ca
-                  </a>
-                </div>
-                <div className="flex items-center justify-between border-b border-slate-100 pb-2">
-                  <span className="font-bold text-slate-700">Turnaround Standard</span>
-                  <span className="text-slate-600 font-semibold">24–48 hours post-study</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-slate-700">Required Info</span>
-                  <span className="text-slate-600">PHN, Patient DOB, Requested Modality</span>
-                </div>
-              </div>
-
-              <div className="mt-6 flex flex-wrap gap-3">
+              <div className="p-8 pt-0 flex flex-wrap gap-3">
                 <a
                   href="mailto:info@breathoptix.ca?subject=Physician%20Referral"
                   className="rounded-full bg-slate-900 px-6 py-3 text-xs font-bold text-white transition hover:bg-sky-600"
@@ -548,42 +704,51 @@ function LandingPage() {
             </div>
 
             {/* Box 2: For Patients */}
-            <div className="rounded-3xl border border-slate-200/90 bg-gradient-to-br from-slate-50 to-cyan-50/30 p-8 sm:p-10 shadow-sm">
-              <div className="flex size-12 items-center justify-center rounded-2xl bg-cyan-600 text-white">
-                <ShieldCheck className="size-6" />
+            <div className="overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-sm flex flex-col justify-between">
+              <div>
+                <div className="relative h-48 w-full overflow-hidden">
+                  <img
+                    src={serviceConsultImg}
+                    alt="Patient consulting with respiratory specialist"
+                    className="h-full w-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/30 to-transparent" />
+                  <span className="absolute bottom-4 left-6 text-xs font-bold uppercase tracking-wider text-cyan-300">
+                    Patient Instructions
+                  </span>
+                </div>
+
+                <div className="p-8">
+                  <h3 className="font-display text-2xl font-black text-slate-900">
+                    Preparing for Your Appointment
+                  </h3>
+
+                  <p className="mt-2 text-xs leading-relaxed text-slate-600">
+                    To guarantee optimal test accuracy during your pulmonary function or sleep study, please follow these standard preparation guidelines:
+                  </p>
+
+                  <ul className="mt-6 space-y-3 text-xs text-slate-700">
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="size-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <span><strong>No smoking or vaping</strong> for at least 6 hours before your test.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="size-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <span><strong>Avoid caffeine</strong> (coffee, tea, soda, energy drinks) 6 hours prior.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="size-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <span><strong>Bring medication list &amp; inhalers</strong>, plus your Alberta Health Card.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="size-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <span><strong>Wear comfortable clothing</strong> that permits deep chest expansion.</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
 
-              <span className="mt-6 block text-xs font-bold uppercase tracking-wider text-cyan-700">
-                Patient Instructions
-              </span>
-              <h3 className="mt-1 font-display text-2xl font-black text-slate-900">
-                Preparing for Your Appointment
-              </h3>
-
-              <p className="mt-3 text-sm leading-relaxed text-slate-600">
-                To guarantee optimal test accuracy during your pulmonary function or sleep study, please follow these standard preparation guidelines:
-              </p>
-
-              <ul className="mt-6 space-y-3 text-xs text-slate-700">
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="size-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>No smoking or vaping</strong> for at least 6 hours before your test.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="size-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Avoid caffeine</strong> (coffee, tea, soda, energy drinks) 6 hours prior.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="size-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Bring medication list &amp; inhalers</strong>, plus your Alberta Health Card.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="size-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Wear comfortable, non-restrictive clothing</strong> that permits deep chest expansion.</span>
-                </li>
-              </ul>
-
-              <div className="mt-8 pt-4">
+              <div className="p-8 pt-0">
                 <button
                   onClick={() => openBooking()}
                   className="rounded-full bg-gradient-to-r from-sky-600 to-cyan-600 px-6 py-3 text-xs font-bold text-white shadow-md shadow-sky-500/20 transition hover:shadow-lg"
@@ -597,9 +762,9 @@ function LandingPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 7. CLINIC LOCATION, HOURS & CONTACT */}
+      {/* 8. CLINIC LOCATION, HOURS & CONTACT */}
       {/* ========================================================================= */}
-      <section id="location" className="py-24 scroll-mt-20 border-t border-slate-200/80 bg-slate-50">
+      <section id="location" className="py-24 scroll-mt-20 border-t border-slate-200/80 bg-white">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid gap-12 lg:grid-cols-12 items-center">
             {/* Info */}
@@ -611,23 +776,25 @@ function LandingPage() {
                 Convenient Edmonton Location
               </h2>
               <p className="mt-3 text-base text-slate-600">
-                Easily accessible with ample free parking. We are located right on 82nd Avenue NW.
+                Easily accessible with ample free parking directly in front of the clinic.
               </p>
 
               <div className="mt-8 space-y-4">
-                <div className="flex items-start gap-4 rounded-2xl bg-white p-5 border border-slate-200/80 shadow-sm">
-                  <div className="flex size-11 items-center justify-center rounded-xl bg-sky-50 text-sky-600 shrink-0">
+                <div className="flex items-start gap-4 rounded-2xl bg-slate-50 p-5 border border-slate-200/80 shadow-sm">
+                  <div className="flex size-11 items-center justify-center rounded-xl bg-sky-100 text-sky-600 shrink-0">
                     <MapPin className="size-5" />
                   </div>
                   <div>
                     <h4 className="font-display font-bold text-slate-900">Clinic Address</h4>
                     <p className="text-sm text-slate-600 mt-0.5">{clinic.address}</p>
-                    <span className="inline-block mt-1 text-xs text-sky-600 font-semibold">Free on-site parking available</span>
+                    <span className="inline-block mt-1 text-xs text-sky-600 font-semibold">
+                      Free on-site parking available
+                    </span>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4 rounded-2xl bg-white p-5 border border-slate-200/80 shadow-sm">
-                  <div className="flex size-11 items-center justify-center rounded-xl bg-cyan-50 text-cyan-600 shrink-0">
+                <div className="flex items-start gap-4 rounded-2xl bg-slate-50 p-5 border border-slate-200/80 shadow-sm">
+                  <div className="flex size-11 items-center justify-center rounded-xl bg-cyan-100 text-cyan-600 shrink-0">
                     <Clock className="size-5" />
                   </div>
                   <div>
@@ -637,8 +804,8 @@ function LandingPage() {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4 rounded-2xl bg-white p-5 border border-slate-200/80 shadow-sm">
-                  <div className="flex size-11 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600 shrink-0">
+                <div className="flex items-start gap-4 rounded-2xl bg-slate-50 p-5 border border-slate-200/80 shadow-sm">
+                  <div className="flex size-11 items-center justify-center rounded-xl bg-indigo-100 text-indigo-600 shrink-0">
                     <Mail className="size-5" />
                   </div>
                   <div>
@@ -654,7 +821,7 @@ function LandingPage() {
 
             {/* Visual Location Frame / Quick Booking Card */}
             <div className="lg:col-span-6">
-              <div className="rounded-3xl border border-slate-200 bg-white p-8 sm:p-10 shadow-xl">
+              <div className="rounded-3xl border border-slate-200 bg-slate-50/50 p-8 sm:p-10 shadow-xl">
                 <div className="flex items-center gap-2 text-sky-600">
                   <Sparkles className="size-5" />
                   <span className="text-xs font-bold uppercase tracking-wider">Fast Track Intake</span>
@@ -677,14 +844,14 @@ function LandingPage() {
 
                   <a
                     href={`mailto:${clinic.email}?subject=Appointment%20Inquiry`}
-                    className="w-full flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-slate-50 py-3.5 text-xs font-bold text-slate-700 transition hover:bg-slate-100"
+                    className="w-full flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white py-3.5 text-xs font-bold text-slate-700 transition hover:bg-slate-100"
                   >
                     <Mail className="size-4" />
                     <span>Email Front Desk Directly</span>
                   </a>
                 </div>
 
-                <div className="mt-6 pt-6 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <div className="mt-6 pt-6 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
                   <span>Edmonton, Alberta</span>
                   <span className="flex items-center gap-1 text-emerald-600 font-bold">
                     <span className="size-2 rounded-full bg-emerald-500" /> Clinic Open Mon–Fri
@@ -697,7 +864,7 @@ function LandingPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 8. HIGH-IMPACT FINAL CTA BANNER */}
+      {/* 9. HIGH-IMPACT FINAL CTA BANNER */}
       {/* ========================================================================= */}
       <section className="bg-slate-900 py-20 text-white relative overflow-hidden">
         <div className="ambient-glow -bottom-24 -left-24 size-80 bg-sky-500/20" />
