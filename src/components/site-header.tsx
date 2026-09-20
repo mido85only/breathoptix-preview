@@ -6,6 +6,7 @@ import {
   MapPin,
   Menu,
   Phone,
+  ShoppingBag,
   ShoppingCart,
   X,
 } from "lucide-react";
@@ -21,7 +22,7 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 w-full transition-all">
-      {/* 1. Top Utility Info Bar (Professional Clinic Standard) */}
+      {/* 1. Top Utility Info Bar */}
       <div className="hidden border-b border-slate-200/80 bg-slate-900 text-slate-300 text-xs font-medium md:block">
         <div className="mx-auto flex h-10 max-w-7xl items-center justify-between px-6">
           {/* Left: Location & Hours */}
@@ -36,8 +37,16 @@ export function SiteHeader() {
             </div>
           </div>
 
-          {/* Right: Direct Phone & Email */}
+          {/* Right: Direct Phone, Email & Shop link */}
           <div className="flex items-center gap-6">
+            <Link
+              to="/shop"
+              className="flex items-center gap-1.5 text-sky-300 hover:text-white transition font-semibold"
+            >
+              <ShoppingBag className="size-3.5 text-sky-400" />
+              <span>CPAP Replacement Supplies Online</span>
+            </Link>
+            <span className="text-slate-600">|</span>
             <a
               href="tel:7805550142"
               className="flex items-center gap-1.5 text-slate-300 hover:text-white transition"
@@ -45,32 +54,24 @@ export function SiteHeader() {
               <Phone className="size-3.5 text-sky-400" />
               <span>(780) 555-0142</span>
             </a>
-            <a
-              href={`mailto:${clinic.email}`}
-              className="flex items-center gap-1.5 text-slate-300 hover:text-white transition"
-            >
-              <Mail className="size-3.5 text-sky-400" />
-              <span>{clinic.email}</span>
-            </a>
           </div>
         </div>
       </div>
 
-      {/* 2. Main Navigation Bar (Glassmorphic & Clean) */}
+      {/* 2. Main Navigation Bar */}
       <div className="border-b border-slate-200/80 bg-white/90 backdrop-blur-md shadow-sm">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
           {/* Official Brand Logo */}
-          <a href="/#" className="flex items-center gap-3 group">
+          <Link to="/" className="flex items-center gap-3 group">
             <img
               src={logoHorizontal}
               alt="BreathOptix Diagnostic Clinic"
               className="h-11 w-auto max-w-[200px] object-contain transition-transform group-hover:scale-102"
               onError={(e) => {
-                // Fallback to square logo or text if horizontal has specific aspect
                 (e.currentTarget as HTMLImageElement).src = logoSquare;
               }}
             />
-          </a>
+          </Link>
 
           {/* Center Navigation Links */}
           <nav className="hidden items-center gap-7 text-sm font-bold text-slate-700 lg:flex">
@@ -85,12 +86,6 @@ export function SiteHeader() {
               className="transition hover:text-sky-600 active:text-sky-700"
             >
               The Clinic
-            </a>
-            <a
-              href="/shop"
-              className="transition hover:text-sky-600 active:text-sky-700"
-            >
-              CPAP Supplies
             </a>
             <a
               href="/#how-it-works"
@@ -110,11 +105,29 @@ export function SiteHeader() {
             >
               Hours &amp; Map
             </a>
+
+            {/* Prominent Shop Link in Navigation */}
+            <Link
+              to="/shop"
+              className="inline-flex items-center gap-1.5 rounded-full border border-sky-200 bg-sky-50 px-3.5 py-1 text-xs font-bold text-sky-700 hover:bg-sky-100 hover:border-sky-300 transition"
+            >
+              <ShoppingBag className="size-3.5 text-sky-600" />
+              <span>CPAP Store</span>
+            </Link>
           </nav>
 
           {/* Right Actions */}
-          <div className="flex items-center gap-3.5">
-            {/* Supplies Cart Button */}
+          <div className="flex items-center gap-3">
+            {/* Direct Shop Supplies Pill Button */}
+            <Link
+              to="/shop"
+              className="hidden sm:inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2.5 text-xs font-bold text-slate-700 shadow-sm transition hover:border-sky-300 hover:text-sky-600 hover:shadow"
+            >
+              <ShoppingBag className="size-4 text-sky-600" />
+              <span>Shop Supplies</span>
+            </Link>
+
+            {/* Cart Button */}
             <button
               onClick={openCart}
               aria-label={`Open supplies cart with ${count} items`}
@@ -128,10 +141,10 @@ export function SiteHeader() {
               )}
             </button>
 
-            {/* Direct Book CTA */}
+            {/* Book Appointment CTA */}
             <button
               onClick={() => openBooking()}
-              className="hidden sm:inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-sky-600 to-cyan-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-sky-500/25 transition hover:from-sky-700 hover:to-cyan-700 hover:shadow-sky-500/35 active:scale-98"
+              className="hidden md:inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-sky-600 to-cyan-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-sky-500/25 transition hover:from-sky-700 hover:to-cyan-700 hover:shadow-sky-500/35 active:scale-98"
             >
               <Calendar className="size-4" />
               <span>Book Appointment</span>
@@ -152,6 +165,28 @@ export function SiteHeader() {
         {open && (
           <div className="border-t border-slate-200/80 bg-white px-6 py-6 shadow-2xl lg:hidden">
             <nav className="flex flex-col gap-4 text-base font-semibold text-slate-700">
+              {/* Highlighted Store Card on Mobile */}
+              <Link
+                to="/shop"
+                onClick={() => setOpen(false)}
+                className="flex items-center justify-between rounded-2xl border border-sky-200 bg-sky-50/80 p-3.5 text-sky-900 transition hover:bg-sky-100"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="flex size-10 items-center justify-center rounded-xl bg-sky-600 text-white shadow-sm">
+                    <ShoppingBag className="size-5" />
+                  </div>
+                  <div>
+                    <span className="font-display text-sm font-bold block">
+                      CPAP Supplies Store
+                    </span>
+                    <span className="text-xs font-normal text-sky-700">
+                      Masks, cushions, filters &amp; accessories
+                    </span>
+                  </div>
+                </div>
+                <span className="text-xs font-extrabold text-sky-600">Shop →</span>
+              </Link>
+
               <a
                 href="/#services"
                 onClick={() => setOpen(false)}
@@ -165,13 +200,6 @@ export function SiteHeader() {
                 className="py-1 hover:text-sky-600"
               >
                 The Clinic Tour
-              </a>
-              <a
-                href="/shop"
-                onClick={() => setOpen(false)}
-                className="py-1 hover:text-sky-600"
-              >
-                CPAP Supplies Store
               </a>
               <a
                 href="/#how-it-works"
