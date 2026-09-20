@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import heroImg from "@/assets/hero-clinic.jpg";
 import servicePftImg from "@/assets/service-pft.jpg";
@@ -28,6 +28,7 @@ import {
   Mail,
   MapPin,
   Moon,
+  Package,
   Phone,
   Shield,
   ShieldCheck,
@@ -188,13 +189,13 @@ function LandingPage() {
 
               {/* Action Links Strip */}
               <div className="mt-4 flex flex-wrap items-center gap-4 text-xs font-bold text-slate-600 px-2">
-                <a
-                  href="#shop"
+                <Link
+                  to="/shop"
                   className="flex items-center gap-1.5 text-sky-600 hover:text-sky-700 hover:underline"
                 >
                   <span>Browse authentic CPAP supplies store</span>
                   <ArrowRight className="size-3.5" />
-                </a>
+                </Link>
                 <span className="hidden sm:inline text-slate-300">·</span>
                 <a
                   href="#referrals"
@@ -633,71 +634,65 @@ function LandingPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 6. INTEGRATED CPAP & RESPIRATORY SUPPLIES STORE */}
+      {/* 6. FEATURED CPAP SUPPLIES PREVIEW (LEADS TO DEDICATED /shop PAGE) */}
       {/* ========================================================================= */}
-      <section id="shop" className="border-t border-slate-200/80 bg-white py-24 scroll-mt-20">
+      <section id="shop-preview" className="border-t border-slate-200/80 bg-white py-24 scroll-mt-20">
         <div className="mx-auto max-w-7xl px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-sky-600 bg-sky-50 px-3 py-1 rounded-full border border-sky-100">
-                Supplies &amp; Accessories Store
+                Clinic Supplies Store
               </span>
               <h2 className="mt-3 font-display text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
-                Genuine CPAP &amp; Respiratory Supplies
+                Essential CPAP &amp; Respiratory Supplies
               </h2>
               <p className="mt-2 text-base text-slate-600 max-w-2xl">
-                Hospital-grade replacement parts, memory-foam cushions, filters, and sanitizer wipes.
-                Priced in Canadian Dollars (CAD) with Edmonton clinic pickup or fast Alberta shipping.
+                Authentic replacement masks, memory-foam cushions, filters, and tubing. Priced in
+                CAD with doorstep clinic pickup in Edmonton or fast Alberta-wide delivery.
               </p>
             </div>
 
-            <button
-              onClick={openCart}
-              className="self-start md:self-auto flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-xs font-bold text-slate-700 shadow-sm hover:border-sky-300 hover:text-sky-600"
+            <Link
+              to="/shop"
+              className="self-start md:self-auto flex items-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-xs font-bold text-white shadow-lg transition hover:bg-sky-600 active:scale-98"
             >
-              <span>View Your Cart</span>
-              <ArrowRight className="size-3.5" />
-            </button>
+              <span>Visit Full Online Store (8+ Items)</span>
+              <ArrowRight className="size-4" />
+            </Link>
           </div>
 
-          {/* Category Filter Tabs */}
-          <div className="mt-8 flex flex-wrap gap-2">
-            {(["All", ...categories] as const).map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`rounded-full px-5 py-2 text-xs font-bold transition-all ${
-                  activeCategory === cat
-                    ? "bg-sky-600 text-white shadow-md shadow-sky-500/20"
-                    : "border border-slate-200 bg-white text-slate-600 hover:border-sky-200 hover:text-sky-600"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+          {/* Top 4 Featured Products Preview */}
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {products
+              .filter((p) => p.featured)
+              .slice(0, 4)
+              .map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
           </div>
 
-          {/* Products Grid */}
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {filteredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-
-          {/* Clinic Compliance Note */}
-          <div className="mt-12 rounded-2xl border border-sky-100 bg-sky-50/70 p-5 text-xs text-sky-900 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <ShieldCheck className="size-5 text-sky-600 shrink-0" />
-              <span>
-                <strong>Notice:</strong> We do not retail prescription medications (inhalers) or uncalibrated CPAP machines online. All supplies are authentic medical grade.
-              </span>
+          {/* Banner connecting to full store */}
+          <div className="mt-12 rounded-3xl border border-sky-200 bg-gradient-to-r from-sky-50 via-white to-sky-50/50 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
+            <div className="flex items-center gap-4">
+              <div className="flex size-12 items-center justify-center rounded-2xl bg-sky-600 text-white shrink-0 shadow-md shadow-sky-600/20">
+                <Package className="size-6" />
+              </div>
+              <div>
+                <h4 className="font-display text-base font-bold text-slate-900">
+                  Looking for additional cushions, tubing, or sanitizing kits?
+                </h4>
+                <p className="text-xs text-slate-600 mt-0.5">
+                  Browse our complete product catalog with instant category filtering and real-time inventory.
+                </p>
+              </div>
             </div>
-            <button
-              onClick={() => openBooking(cpapFittingService)}
-              className="shrink-0 text-xs font-bold text-sky-700 hover:underline"
+
+            <Link
+              to="/shop"
+              className="shrink-0 inline-flex items-center gap-2 rounded-full bg-sky-600 px-6 py-3 text-xs font-bold text-white shadow-md transition hover:bg-sky-700"
             >
-              Need a machine? Book in-clinic fitting →
-            </button>
+              <span>Explore All Supplies →</span>
+            </Link>
           </div>
         </div>
       </section>
@@ -952,12 +947,12 @@ function LandingPage() {
             >
               Book an Appointment
             </button>
-            <a
-              href="#shop"
+            <Link
+              to="/shop"
               className="rounded-full border border-white/20 bg-white/10 px-8 py-4 font-bold text-white backdrop-blur-sm transition hover:bg-white/20"
             >
               Browse Supplies Store
-            </a>
+            </Link>
           </div>
         </div>
       </section>

@@ -87,7 +87,7 @@ export function SiteHeader() {
               The Clinic
             </a>
             <a
-              href="/#shop"
+              href="/shop"
               className="transition hover:text-sky-600 active:text-sky-700"
             >
               CPAP Supplies
@@ -167,7 +167,7 @@ export function SiteHeader() {
                 The Clinic Tour
               </a>
               <a
-                href="/#shop"
+                href="/shop"
                 onClick={() => setOpen(false)}
                 className="py-1 hover:text-sky-600"
               >
